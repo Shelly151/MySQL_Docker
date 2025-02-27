@@ -1,45 +1,53 @@
-Docker Basics: Running a Simple Python App
+# **Docker Basics: Running a Simple Python App**
 
 This project introduces the basics of Docker by running a simple Python script inside a container. We will start by printing "Hello, World!" using Docker.
 
-Prerequisites
+## **Prerequisites**
 
 Before starting, ensure you have the following installed on your system:
 
-Docker Desktop (Download Here)
+- **Docker Desktop** ([Download Here](https://www.docker.com/products/docker-desktop))
+- **Python** ([Download Here](https://www.python.org/downloads/))
 
-Python (Download Here)
-
-Step 1: Setting Up the Project
+## **Step 1: Setting Up the Project**
 
 Create a new project directory and navigate into it:
 
+```sh
 mkdir docker-hello-world  
 cd docker-hello-world  
+```
 
-Create a Python script named app.py:
+Create a Python script named `app.py`:
 
+```python
 # app.py
 print("Hello, World!")
+```
 
-Step 2: Verify Docker and Python Installation
+## **Step 2: Verify Docker and Python Installation**
 
 To check if Docker and Python are installed, run the following commands:
 
-Check Docker Version:
+### **Check Docker Version:**
 
+```sh
 docker --version
+```
 
-Check Python Version:
+### **Check Python Version:**
 
+```sh
 python --version
+```
 
 If both commands return their respective versions, you are ready to proceed.
 
-Step 3: Creating a Dockerfile
+## **Step 3: Creating a Dockerfile**
 
-Inside the project directory, create a file named Dockerfile (without any extension) and add the following content:
+Inside the project directory, create a file named `Dockerfile` (without any extension) and add the following content:
 
+```dockerfile
 # Use the official Python image
 FROM python:3.9  
 
@@ -51,35 +59,45 @@ COPY app.py .
 
 # Command to run the script
 CMD ["python", "app.py"]
+```
 
-Step 4: Building the Docker Image
+## **Step 4: Building the Docker Image**
 
 Run the following command to build the Docker image:
 
+```sh
 docker build -t hello-world-app .
+```
 
 After the build is complete, you can verify the created image by running:
 
+```sh
 docker images
+```
 
-Step 5: Running the Docker Container
+## **Step 5: Running the Docker Container**
 
 Now, run the Docker container using the following command:
 
+```sh
 docker run hello-world-app
+```
 
 If everything is set up correctly, the output should be:
 
+```
 Hello, World!
+```
 
-Running MySQL Using Docker
+## **Running MySQL Using Docker**
 
 This section will guide you through setting up and running a MySQL database inside a Docker container.
 
-Step 1: Creating a MySQL Database Script
+## **Step 1: Creating a MySQL Database Script**
 
-Create a SQL file named database_students.sql with the following content:
+Create a SQL file named `database_students.sql` with the following content:
 
+```sql
 CREATE DATABASE student;
 USE student;
 
@@ -92,59 +110,74 @@ CREATE TABLE students (
 
 INSERT INTO students (FirstName, Surname)
 VALUES ("John", "Andersen"), ("Emma", "Smith");
+```
 
-Step 2: Creating the Dockerfile
+## **Step 2: Creating the Dockerfile**
 
-Inside the project directory, create a Dockerfile for MySQL:
+Inside the project directory, create a `Dockerfile` for MySQL:
 
+```dockerfile
 FROM mysql:latest
 
 ENV MYSQL_ROOT_PASSWORD=root
 
 COPY ./database_students.sql /docker-entrypoint-initdb.d/
+```
 
-Step 3: Deploying MySQL Using Docker
+## **Step 3: Deploying MySQL Using Docker**
 
-Check Running Containers
+### **Check Running Containers**
 
+```sh
 docker container ls
+```
 
-Build the MySQL Docker Image
+### **Build the MySQL Docker Image**
 
+```sh
 docker build -t mysql_db .
+```
 
-Verify Image Creation
+### **Verify Image Creation**
 
+```sh
 docker images
+```
 
-Run the MySQL Container
+### **Run the MySQL Container**
 
+```sh
 docker run --name mysql_container -d mysql_db
+```
 
-Access the Running MySQL Container
+### **Access the Running MySQL Container**
 
+```sh
 docker exec -it mysql_container /bin/bash
+```
 
-Interact with the MySQL Database
+### **Interact with the MySQL Database**
 
+```sh
 mysql -u root -p
+```
 
-Enter the root password (default: root), then run:
+Enter the root password (default: `root`), then run:
 
+```sql
 USE student;
 SELECT * FROM students;
+```
 
-Conclusion
+## **Conclusion**
 
 Congratulations! 🎉 You have successfully created and run a MySQL database using Docker. This guide covered both running a simple Python app and setting up a MySQL database inside a Docker container. 🚀
 
 For further learning, you can:
 
-Modify the SQL script to add more data.
-
-Use Docker Compose to manage multiple containers.
-
-Connect the MySQL database to a backend application.
+- Modify the SQL script to add more data.
+- Use Docker Compose to manage multiple containers.
+- Connect the MySQL database to a backend application.
 
 Happy coding! 🚀
 
